@@ -60,8 +60,12 @@ for sp in splits:
             else:
                 im_A = cv2.imread(path_A, 1) # python2: cv2.CV_LOAD_IMAGE_COLOR; python3: cv2.IMREAD_COLOR
                 im_B = cv2.imread(path_B, 1) # python2: cv2.CV_LOAD_IMAGE_COLOR; python3: cv2.IMREAD_COLOR
+                #print(f'num_img: {n}, A: {path_A}, B: {path_B}')
+            if im_A.shape == im_B.shape:
                 im_AB = np.concatenate([im_A, im_B], 1)
                 cv2.imwrite(path_AB, im_AB)
+            else:
+                print(f'Mismatch shape! num_img: {n}, {path_A}, shape_A: {im_A.shape}, shape_B: {im_B.shape}')
 if not args.no_multiprocessing:
     pool.close()
     pool.join()

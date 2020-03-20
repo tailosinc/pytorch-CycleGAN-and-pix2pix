@@ -50,6 +50,19 @@ if __name__ == '__main__':
             epoch_iter += opt.batch_size
             model.set_input(data)         # unpack data from dataset and apply preprocessing
             model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+#            try:
+#                model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+#            except:
+#                print('==== what')
+#                print(data['A_paths'])
+#                #import matplotlib.pyplot as plt
+#                #import numpy as np
+#                #plt.subplot(1,2,1)
+#                #plt.imshow(np.moveaxis(data['A'].numpy().squeeze(), 0, -1))
+#                #plt.subplot(1,2,2)
+#                #plt.imshow(np.moveaxis(data['B'].numpy().squeeze(), 0, -1))
+#                #plt.show()
+#                continue
 
             if total_iters % opt.display_freq == 0:   # display images on visdom and save images to a HTML file
                 save_result = total_iters % opt.update_html_freq == 0

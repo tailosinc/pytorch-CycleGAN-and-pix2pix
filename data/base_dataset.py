@@ -87,6 +87,10 @@ def get_transform(opt, params=None, grayscale=False, method=Image.BICUBIC, conve
         transform_list.append(transforms.Resize(osize, method))
     elif 'scale_width' in opt.preprocess:
         transform_list.append(transforms.Lambda(lambda img: __scale_width(img, opt.load_size, opt.crop_size, method)))
+    elif 'scale_maintain_ratio' in opt.preprocess:
+        transform_list.append(transforms.Lambda(lambda img: __scale_maintain_ratio(img, opt.crop_size, method)))
+    elif 'scale_nearest256' in opt.preprocess:
+        transform_list.append(transforms.Lambda(lambda img: __scale_nearest256(img, method)))
 
     if 'crop' in opt.preprocess:
         if params is None:
@@ -129,6 +133,37 @@ def __scale_width(img, target_size, crop_size, method=Image.BICUBIC):
         return img
     w = target_size
     h = int(max(target_size * oh / ow, crop_size))
+    return img.resize((w, h), method)
+
+
+def __scale_maintain_ratio(img, crop_size, method=Image.BICUBIC):
+    ow, oh = img.size
+    if ow >= crop_size and oh >= crop_size:
+        return img
+    elif ow < crop_size and oh < crop_size:
+        if ow/crop_size < oh/crop_size:
+            w = crop_size
+            h = int((crop_size / ow) * oh)
+        else:
+            w = int((crop_size / oh) * ow)
+            h = crop_size
+    elif ow < crop_size:
+        w = crop_size
+        h = int((crop_size / ow) * oh)
+    elif oh < crop_size:
+        w = int((crop_size / oh) * ow)
+        h = crop_size
+    return img.resize((w, h), method)
+
+
+def __scale_nearest256(img, method=Image.BICUBIC):
+    ow, oh = img.size
+    w = 256 * round(ow / 256)
+    h = 256 * round(oh / 256)
+    if w == 0:
+        w = 256
+    if h == 0:
+        h = 256
     return img.resize((w, h), method)
 
 

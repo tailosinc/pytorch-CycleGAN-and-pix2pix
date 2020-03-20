@@ -53,6 +53,18 @@ class AlignedDataset(BaseDataset):
         A = A_transform(A)
         B = B_transform(B)
 
+# TODO: remove plotting code for seeing how scaling the image affects it
+#        import matplotlib.pyplot as plt
+#        import numpy as np
+#        a_np = A.numpy()
+#        b_np = B.numpy()
+#        plt.subplot(1,2,1)
+#        plt.imshow(np.moveaxis(a_np, 0, -1))
+#        plt.subplot(1,2,2)
+#        plt.imshow(np.moveaxis(b_np, 0, -1))
+#        plt.show()
+#        assert 3 > 4
+
         return {'A': A, 'B': B, 'A_paths': AB_path, 'B_paths': AB_path}
 
     def __len__(self):

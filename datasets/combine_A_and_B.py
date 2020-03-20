@@ -55,6 +55,7 @@ for sp in splits:
             if args.use_AB:
                 name_AB = name_AB.replace('_A.', '.')  # remove _A
             path_AB = os.path.join(img_fold_AB, name_AB)
+            print(path_AB)
             if not args.no_multiprocessing:
                 pool.apply_async(image_write, args=(path_A, path_B, path_AB))
             else:

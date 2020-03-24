@@ -11,5 +11,7 @@
 #         image2.png
 
 #python3.7 datasets/combine_A_and_B.py --fold_A ../downloaded_maps/paired_images_A --fold_B ../downloaded_maps/paired_images_B --fold_AB mb_maps/
-python3.7 datasets/combine_A_and_B.py --fold_A mb_maps/test_small_2ndpass/A/ --fold_B mb_maps/test_small_2ndpass/B --fold_AB mb_maps/test_small_2ndpass
+#python3.7 datasets/combine_A_and_B.py --fold_A mb_maps/test_small_2ndpass/A/ --fold_B mb_maps/test_small_2ndpass/B --fold_AB mb_maps/test_small_2ndpass
+#python3.7 datasets/combine_A_and_B.py --fold_A results/mb_maps_pix2pix_train_crop256_maintainRatio/train_latest/images/A --fold_B results/mb_maps_pix2pix_train_crop256_maintainRatio/train_latest/images/B --fold_AB mb_maps/train_2ndpass
+python3.7 datasets/combine_A_and_B.py --fold_A mb_maps/test_2ndpass/A/ --fold_B mb_maps/test_2ndpass/B/ --fold_AB mb_maps/test_2ndpass/
 

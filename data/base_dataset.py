@@ -69,13 +69,34 @@ def get_params(opt, size):
     elif opt.preprocess == 'scale_width_and_crop':
         new_w = opt.load_size
         new_h = opt.load_size * h // w
+    elif opt.preprocess == 'scale_maintain_ratio_and_crop':
+        crop_size = 256 # NOTE: hardcoded due to the way this code was set up ... tries to get_params() before figuring out actual image size ... duplicated code ...
+        if w >= crop_size and h >= crop_size:
+            pass
+        elif w < crop_size and h < crop_size:
+            if w/crop_size < h/crop_size:
+                new_w = crop_size
+                new_h = int((crop_size / w) * h)
+            else:
+                new_w = int((crop_size / h) * w)
+                new_h = crop_size
+        elif w < crop_size:
+            new_w = crop_size
+            new_h = int((crop_size / w) * h)
+        elif h < crop_size:
+            new_w = int((crop_size / h) * w)
+            new_h = crop_size
 
     x = random.randint(0, np.maximum(0, new_w - opt.crop_size))
     y = random.randint(0, np.maximum(0, new_h - opt.crop_size))
 
-    flip = random.random() > 0.5
+    # Probability of horizontally flipping image or not
+    flip_horizontally = random.random() > 0.5
 
-    return {'crop_pos': (x, y), 'flip': flip}
+    # Probability of vertically flipping image or not
+    flip_vertically = random.random() > 0.5
+
+    return {'crop_pos': (x, y), 'flip_horizontally': flip_horizontally, 'flip_vertically': flip_vertically}
 
 
 def get_transform(opt, params=None, grayscale=False, method=Image.BICUBIC, convert=True):
@@ -101,11 +122,17 @@ def get_transform(opt, params=None, grayscale=False, method=Image.BICUBIC, conve
     if opt.preprocess == 'none':
         transform_list.append(transforms.Lambda(lambda img: __make_power_2(img, base=4, method=method)))
 
-    if not opt.no_flip:
+    if not opt.no_flip_horizontally:
         if params is None:
             transform_list.append(transforms.RandomHorizontalFlip())
-        elif params['flip']:
-            transform_list.append(transforms.Lambda(lambda img: __flip(img, params['flip'])))
+        elif params['flip_horizontally']: # Sometimes true, sometimes false
+            transform_list.append(transforms.Lambda(lambda img: __flip_horizontally(img, params['flip_horizontally'])))
+
+    if not opt.no_flip_vertically:
+        if params is None:
+            transform_list.append(transforms.RandomVerticalFlip())
+        elif params['flip_vertically']: # Sometimes true, sometimes false
+            transform_list.append(transforms.Lambda(lambda img: __flip_vertically(img, params['flip_vertically'])))
 
     if convert:
         transform_list += [transforms.ToTensor()]
@@ -176,9 +203,15 @@ def __crop(img, pos, size):
     return img
 
 
-def __flip(img, flip):
-    if flip:
+def __flip_horizontally(img, flip_horizontally):
+    if flip_horizontally:
         return img.transpose(Image.FLIP_LEFT_RIGHT)
+    return img
+
+
+def __flip_vertically(img, flip_vertically):
+    if flip_vertically:
+        return img.transpose(Image.FLIP_TOP_BOTTOM)
     return img
 
 

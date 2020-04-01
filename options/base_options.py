@@ -49,6 +49,7 @@ class BaseOptions():
         parser.add_argument('--preprocess', type=str, default='resize_and_crop', help='scaling and cropping of images at load time [resize_and_crop | crop | scale_width | scale_width_and_crop | none | scale_maintain_ratio_and_crop | scale_maintain_ratio | scale_nearest256]')
         parser.add_argument('--no_flip_horizontally', action='store_true', help='if specified, do not flip the images horizontally for data augmentation')
         parser.add_argument('--no_flip_vertically', action='store_true', help='if specified, do not flip the images vertically for data augmentation')
+        parser.add_argument('--no_rotate', action='store_true', help='if specified, do not rotate the images for data augmentation')
         parser.add_argument('--display_winsize', type=int, default=256, help='display window size for both visdom and HTML')
         # additional parameters
         parser.add_argument('--epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')

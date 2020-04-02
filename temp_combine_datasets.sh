@@ -19,4 +19,5 @@
 #python3.7 datasets/combine_A_and_B.py --fold_A results/mb_maps_pix2pix_train_noRooms_L1400/train_noRooms_latest/images/A/ --fold_B results/mb_maps_pix2pix_train_noRooms_L1400/train_noRooms_latest/images/B/ --fold_AB mb_maps/train_2ndpass_noRooms_L1400
 #python3.7 datasets/combine_A_and_B.py --fold_A results/mb_maps_pix2pix_train_crop256_maintainRatio_L1400/test_small_latest/images/A/ --fold_B results/mb_maps_pix2pix_train_crop256_maintainRatio_L1400/test_small_latest/images/B/ --fold_AB mb_maps/test_small_2ndpass_L1400
 #python3.7 datasets/combine_A_and_B.py --fold_A results/mb_maps_pix2pix_train_noRooms_L1400/test_small_latest/images/A/ --fold_B results/mb_maps_pix2pix_train_noRooms_L1400/test_small_latest/images/B/ --fold_AB mb_maps/test_small_2ndpass_noRooms_L1400
-
+#python3.7 datasets/combine_A_and_B.py --fold_A results/mb_maps_pix2pix_train_noRooms_L1400_diags/train_noRooms_latest/images/A/ --fold_B results/mb_maps_pix2pix_train_noRooms_L1400_diags/train_noRooms_latest/images/B/ --fold_AB mb_maps/train_2ndpass_noRooms_L1400_diags
+#python3.7 datasets/combine_A_and_B.py --fold_A results/mb_maps_pix2pix_train_noRooms_L1400_diags/test_small_latest/images/A/ --fold_B results/mb_maps_pix2pix_train_noRooms_L1400_diags/test_small_latest/images/B/ --fold_AB mb_maps/test_small_2ndpass_noRooms_L1400_diags

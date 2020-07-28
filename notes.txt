@@ -1,0 +1,34 @@
+
+Steps for training
+==================
+
+1. Gather the training set and put it into the proper directory structure described in
+   temp_combine_datasets.sh (A/train/images B/train/images)
+   - A's images will be the generated images
+   - B's images will be the cleaned up, "true" images hand-crafted by an RSE intern
+
+2. Run the temp_combine_datasets.sh script to combine each pair of images into one pair that
+   will get placed in the training folder
+
+3. Run the training script to generate the GAN-produced images in the results folder. These
+   images are the output of 1st pass of the GAN and will be used as the input for the 2nd GAN pass
+
+4. Run the convert_1stpass_to_2ndpass_training.py script to convert the 1st pass images into
+   the input images for the 2nd pass
+
+5. Run the temp_train.sh again (this time to produce the 2nd pass images)
+
+6. The final GAN-generated images will be in the results folder
+
+
+
+Steps for testing
+=================
+
+1. Pretty much the same thing as training except you run the temp_test.sh script.
+   Note that the testing image input has to be a concatenated image again (compose of the
+   input test image concatenated with the real test image). This is because this is format
+   expected by the GAN. Even though you're providing the real image to the GAN in the test
+   data, don't worry. It doesn't use the real image when performing inference. It's just
+   there for comparison later in the final output. Instead of concatenating the real image,
+   you can concatenate any image (already tested this)

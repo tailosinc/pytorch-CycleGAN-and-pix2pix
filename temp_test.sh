@@ -6,13 +6,13 @@ set -ex
 # NOTE: test results (generated images from inference) will be generated under results/ (specified through --results_dir flag)
 
 # No rooms, 1st pass, L1 = 400
-#DATAROOT=mb_maps/
-#NAME=mb_maps_pix2pix_train_noRooms_L1400_diags
-#PHASE=test_small
+DATAROOT=mb_maps/
+NAME=mb_maps_pix2pix_train_noRooms_L1400
+PHASE=test_small
 
 # No rooms, 2nd pass, L1 = 400 --> 200
-DATAROOT=mb_maps/
-NAME=mb_maps_pix2pix_train_2ndpass_noRooms_L1400_L1200_diags
-PHASE=test_small_2ndpass_noRooms_L1400_diags
+#DATAROOT=mb_maps/
+#NAME=mb_maps_pix2pix_train_2ndpass_noRooms_L1400_L1200
+#PHASE=test_small_2ndpass_noRooms_L1400
 
-python3.7 test.py --dataroot $DATAROOT --name $NAME --model pix2pix --gpu_ids -1 --preprocess scale_nearest256 --phase $PHASE --no_rotate --no_flip_horizontally --no_flip_vertically
+python3 test.py --dataroot $DATAROOT --name $NAME --model pix2pix --gpu_ids -1 --preprocess scale_nearest256 --phase $PHASE --no_rotate --no_flip_horizontally --no_flip_vertically

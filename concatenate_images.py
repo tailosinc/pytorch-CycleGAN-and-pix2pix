@@ -5,8 +5,8 @@ import shutil
 import numpy as np
 import cv2
 
-input_dir = 'results/investor_demo_images/non_concatenated_images/'
-output_dir = 'results/investor_demo_images/concatenated_images'
+input_dir = 'pix2pix/results/investor_demo_images/non_concatenated_images/'
+output_dir = 'pix2pix/results/investor_demo_images/concatenated_images'
 
 print('=== concatenated output files ===')
 for root, dirs, files in os.walk(input_dir):

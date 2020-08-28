@@ -1,4 +1,4 @@
-from .base_options import BaseOptions
+from pix2pix.options.base_options import BaseOptions
 
 
 class TrainOptions(BaseOptions):

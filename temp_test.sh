@@ -15,4 +15,13 @@ PHASE=test_small
 #NAME=mb_maps_pix2pix_train_2ndpass_noRooms_L1400_L1200
 #PHASE=test_small_2ndpass_noRooms_L1400
 
-python3 test.py --dataroot $DATAROOT --name $NAME --model pix2pix --gpu_ids -1 --preprocess scale_nearest256 --phase $PHASE --no_rotate --no_flip_horizontally --no_flip_vertically
+python3 test.py \
+    --dataroot $DATAROOT \
+    --name $NAME \
+    --model pix2pix \
+    --gpu_ids -1 \
+    --preprocess scale_nearest256 \
+    --phase $PHASE \
+    --no_rotate \
+    --no_flip_horizontally \
+    --no_flip_vertically
